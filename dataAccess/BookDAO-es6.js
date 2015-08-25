@@ -32,22 +32,29 @@ class DAO{
     }
 }
 
+function dbOperation(target, name, descriptor){
+    let f = descriptor.value;
+    descriptor.value = async function(...args){
+        let db = await this.open();
+        try {
+            await f.apply(this, [db, ...args]);
+        } finally{
+            this.dispose(db);
+        }
+    };
+    return descriptor;
+}
+
 class BookDAO extends DAO {
     constructor(userId){
         super();
         this.userId = userId;
     }
-    async saveBook(book){
-        let db = await super.open();
-        try {
-            book.userId = this.userId;
-            let result = await db.collection('books').insert(book);
-            super.confirmSingleResult(result);
-        } catch (err){
-            super.logErrorAndReThrow(err);
-        } finally {
-            super.dispose(db);
-        }
+    @dbOperation
+    async saveBook(db, book){
+        book.userId = this.userId;
+        let result = await db.collection('books').insert(book);
+        this.confirmSingleResult(result);
     }
 }
 
