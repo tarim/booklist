@@ -9,24 +9,26 @@ class HierarchicalSelectableSubjectItem extends React.Component {
         this.setState({childrenVisible: !this.state.childrenVisible});
     }
     render(){
+        let childrenVisible = this.state.childrenVisible,
+            withChildren = this.props.children.length;
         return (
-            <li key={this.props._id}>
-                {this.props.children.length ?
+            <div>
+                <div key={this.props._id} className="checkbox">
+                    <label>
+                        <input type="checkbox" checked={this.props.selectedSubjects[this.props._id]} />
+                        <span>{this.props.name}</span>
+                    </label>
+                    { withChildren ? <a onClick={() => this.toggleChildren()}><i className={'fa fa-' + (childrenVisible ? 'angle-double-up' : 'angle-double-down')}></i></a> : null }
+                </div>
+
+                { withChildren ?
                     <div>
-                        <i onClick={() => this.props.toggleFilteredSubject(this.props._id)} className={'fa ' + (this.props.selectedSubjects[this.props._id] ? 'fa-check-square-o' : 'fa-square-o')} style={{ cursor: 'pointer' }}></i>
-                        <a onClick={() => this.toggleChildren()}>{this.props.name}</a>&nbsp;
-                        <Collapse in={this.state.childrenVisible}>
-                            <div>
-                                <HierarchicalSelectableSubjectList selectedSubjects={this.props.selectedSubjects} toggleFilteredSubject={this.props.toggleFilteredSubject} subjects={this.props.subjects} subjects={this.props.children} />
-                            </div>
-                        </Collapse>
-                    </div>
-                    :
-                    <div>
-                        <i onClick={() => this.props.toggleFilteredSubject(this.props._id)} className={'fa ' + (this.props.selectedSubjects[this.props._id] ? 'fa-check-square-o' : 'fa-square-o')} style={{ cursor: 'pointer' }}></i>
-                        <span>{this.props.name}</span>&nbsp;
-                    </div>}
-            </li>
+                    <Collapse in={childrenVisible}>
+                        <div>
+                            <HierarchicalSelectableSubjectList selectedSubjects={this.props.selectedSubjects} toggleFilteredSubject={this.props.toggleFilteredSubject} subjects={this.props.subjects} subjects={this.props.children} />
+                        </div>
+                    </Collapse></div> : null }
+            </div>
         )
     }
 }
@@ -34,9 +36,9 @@ class HierarchicalSelectableSubjectItem extends React.Component {
 class HierarchicalSelectableSubjectList extends React.Component {
     render() {
         return (
-            <ul>
+            <div>
                 { this.props.subjects.map(s => <HierarchicalSelectableSubjectItem selectedSubjects={this.props.selectedSubjects} toggleFilteredSubject={this.props.toggleFilteredSubject} subjects={this.props.subjects} key={s._id} {...s} />) }
-            </ul>
+            </div>
         )
     }
 }
