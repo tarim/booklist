@@ -9,7 +9,8 @@ var systemJsDevConfig = {
         redux: 'node_modules/redux/dist/redux.js',
         'redux-thunk': 'node_modules/redux-thunk/lib/index.js',
         reselect: 'node_modules/reselect/lib/index.js',
-        jscolor: 'util/jscolor.js'
+        jscolor: 'util/jscolor.js',
+        d3: 'node_modules/d3/build/d3.js'
     },
     meta: {
         jscolor: {
@@ -29,7 +30,8 @@ var systemJsLiveConfig = {
         'redux': 'node_modules/redux/dist/redux.min.js',
         'redux-thunk': 'node_modules/redux-thunk/lib/index.js',
         'reselect': 'node_modules/reselect/lib/index.js',
-        jscolor: 'util/jscolor.min.js'
+        jscolor: 'util/jscolor.min.js',
+        d3: 'node_modules/d3/build/d3.min.js'
     },
     meta: {
         jscolor: {
