@@ -70,6 +70,14 @@ class LineChart extends React.Component {
     componentDidUpdate(){ this.setAxes(); }
 }
 
+let data = [
+    { date: '7/1/2016', value: 15 },
+    { date: '7/2/2016', value: 19 },
+    { date: '7/3/2016', value: 22 },
+    { date: '7/4/2016', value: 5 },
+    { date: '7/5/2016', value: 55 },
+    { date: '7/6/2016', value: 1 }
+];
 
 class HomeIfLoggedIn extends React.Component{
     constructor(){
@@ -80,28 +88,23 @@ class HomeIfLoggedIn extends React.Component{
         this.setState({ data: this.state.data.concat({ date: '7/7/2016', value: 75 }) });
     }
     render(){
-        let data = [
-            { date: '7/1/2016', value: 15 },
-            { date: '7/2/2016', value: 19 },
-            { date: '7/3/2016', value: 22 },
-            { date: '7/4/2016', value: 5 },
-            { date: '7/5/2016', value: 55 },
-            { date: '7/6/2016', value: 1 }
-        ];
-
         return (
             <div>
                 <MainNavigationBar></MainNavigationBar>
 
-                <button onClick={() => this.addDataPoint()}>Add Point</button>
-
-                <LineChart data={this.state.data} />
+                <h2>Hello</h2>
+                <h2>World</h2>
 
                 <MainHomePane>
                     Welcome to <i>My Library</i>.  Eventually there'll be some sort of interesting dashboard here.  Until then, just use the menu above
                     to either view your library, or scan some books in.
                     <br />
                     <br />
+
+                    <button onClick={() => this.addDataPoint()}>Add Point</button>
+                    <br />
+
+                    <LineChart data={this.state.data} />
 
                 </MainHomePane>
             </div>
@@ -179,15 +182,6 @@ let svg = d3.select('body')
             .append('svg').attr('width', width + margin.left + margin.right)
                           .attr('height', height + margin.top + margin.bottom)
             .append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
-
-let data = [
-    { date: '7/1/2016', value: 15 },
-    { date: '7/2/2016', value: 19 },
-    { date: '7/3/2016', value: 22 },
-    { date: '7/4/2016', value: 5 },
-    { date: '7/5/2016', value: 55 },
-    { date: '7/6/2016', value: 1 }
-];
 
 data.forEach(d => {
     d.date = parseDate(d.date);
