@@ -24,15 +24,79 @@ const MainHomePane = props =>
         <div className="hidden-xs hidden-sm col-md-1 col-lg-3"></div>
     </div>
 
+class LineChart extends React.Component {
+    render() {
+        let margin = {top: 30, right: 20, bottom: 30, left: 50},
+            width = 600 - margin.left - margin.right,
+            height = 270 - margin.top - margin.bottom;
+
+        let parseDate = d3.isoParse;
+
+        let x = d3.scaleTime().range([0, width]),
+            y = d3.scaleLinear().range([height, 0]);
+
+        this.xAxis = d3.axisBottom(x).ticks(5);
+        this.yAxis = d3.axisLeft(y).ticks(5);
+
+        let valueLine = d3.line()
+                          .x(d => x(d.date))
+                          .y(d => y(d.close));
+
+        let data = this.props.data;
+
+        data.forEach(d => {
+            d.date = parseDate(d.date);
+            d.close = +d.value;
+        });
+
+        x.domain(d3.extent(data, d => d.date));
+        y.domain([0, d3.max(data, d => d.close)]);
+
+        return (
+            <svg width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+                <g transform={`translate(${margin.left}, ${margin.top})`}>
+                    <path className="line" d={valueLine(data)}></path>
+                    <g className="x axis" transform={`translate(0, ${height})`} ref={ el => this.xAxisNode = el } ></g>
+                    <g className="y axis" ref={ el => this.yAxisNode = el } ></g>
+                </g>
+            </svg>
+        );
+    }
+    setAxes(){
+        d3.select(this.xAxisNode).call(this.xAxis);
+        d3.select(this.yAxisNode).call(this.yAxis);
+    }
+    componentDidMount(){ this.setAxes(); }
+    componentDidUpdate(){ this.setAxes(); }
+}
+
+
 class HomeIfLoggedIn extends React.Component{
     constructor(){
         super();
-        this.state = {};
+        this.state = { data };
+    }
+    addDataPoint(){
+        this.setState({ data: this.state.data.concat({ date: '7/7/2016', value: 75 }) });
     }
     render(){
+        let data = [
+            { date: '7/1/2016', value: 15 },
+            { date: '7/2/2016', value: 19 },
+            { date: '7/3/2016', value: 22 },
+            { date: '7/4/2016', value: 5 },
+            { date: '7/5/2016', value: 55 },
+            { date: '7/6/2016', value: 1 }
+        ];
+
         return (
             <div>
                 <MainNavigationBar></MainNavigationBar>
+
+                <button onClick={() => this.addDataPoint()}>Add Point</button>
+
+                <LineChart data={this.state.data} />
+
                 <MainHomePane>
                     Welcome to <i>My Library</i>.  Eventually there'll be some sort of interesting dashboard here.  Until then, just use the menu above
                     to either view your library, or scan some books in.
