@@ -9,6 +9,8 @@ import {
 
 import MainNavigationBar from 'applicationRoot/rootComponents/mainNavigation';
 
+const d3 = require('d3');
+
 const MainHomePane = props =>
     <div className="row">
         <div className="hidden-xs hidden-sm col-md-1 col-lg-3"></div>
@@ -92,5 +94,51 @@ class Home extends React.Component{
         );
     }
 }
+
+let margin = { top: 30, right: 20, bottom: 30, left: 50 },
+    width = 600 - margin.left - margin.right,
+    height = 270 - margin.top - margin.bottom;
+
+let parseDate = d3.isoParse;
+
+let x = d3.scaleTime().range([0, width]),
+    y = d3.scaleLinear().range([height, 0]);
+
+let xAxis = d3.axisBottom(x).ticks(5),
+    yAxis = d3.axisLeft(y).ticks(5);
+
+let valueLine = d3.line()
+                  .x(d => x(d.date))
+                  .y(d => y(d.close));
+
+let svg = d3.select('body')
+            .append('svg').attr('width', width + margin.left + margin.right)
+                          .attr('height', height + margin.top + margin.bottom)
+            .append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+let data = [
+    { date: '7/1/2016', value: 15 },
+    { date: '7/2/2016', value: 19 },
+    { date: '7/3/2016', value: 22 },
+    { date: '7/4/2016', value: 5 },
+    { date: '7/5/2016', value: 55 },
+    { date: '7/6/2016', value: 1 }
+];
+
+data.forEach(d => {
+    d.date = parseDate(d.date);
+    d.close = +d.value;
+});
+
+x.domain(d3.extent(data, d => d.date));
+y.domain([0, d3.max(data, d => d.close)]);
+
+svg.append('path').attr('class', 'line').attr('d', valueLine(data));
+
+svg.append('g').attr('class', 'x axis').attr('transform', `translate(0, ${height})`).call(xAxis);
+
+svg.append('g').attr('class', 'y axis').call(yAxis);
+
+
 
 export default Home;
