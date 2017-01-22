@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {Component, DOM, renderComponent} from 'react';
+import {render, findDOMNode} from 'react-dom';
 import { isLoggedIn, goHome } from 'reactStartup';
 
 const MainHomePane = props =>
@@ -14,6 +15,33 @@ const MainHomePane = props =>
         <div className="hidden-xs hidden-sm col-md-1 col-lg-3"></div>
     </div>
 
+class Counter extends Component{
+    constructor(){
+        super();
+        this.state = {val: 1};
+        setInterval(() => this.setState({val: this.state.val + 1}), 1000);
+    }
+    render(){
+        return (
+            <span>{this.state.val}</span>
+        )
+    }
+}
+
+class Junk extends Component{
+    componentDidMount(){
+        this.node = findDOMNode(this);
+        render(DOM.div({}, this.props.children), this.node);
+    }
+    shouldComponentUpdate(){
+        alert('scu')
+        return false;
+    }
+    render(){
+        return DOM.div();
+    }
+}
+
 class HomeIfLoggedIn extends React.Component{
     constructor(){
         super();
@@ -27,6 +55,10 @@ class HomeIfLoggedIn extends React.Component{
                     to either view your library, or scan some books in.
                     <br />
                     <br />
+                    <Junk>
+                        <div>HELLO WORLD</div>
+                        <Counter />
+                    </Junk>
                 </MainHomePane>
             </div>
         )
