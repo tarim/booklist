@@ -5,6 +5,9 @@ var noVisualization = process.env.NODE_ENV === 'production'
         || process.argv.slice(-1)[0] == '-p'
         || process.argv.some(arg => arg.indexOf('webpack-dev-server') >= 0);
 
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const extractCSS = new ExtractTextPlugin('[name].css');
+
 module.exports = {
     entry: {
         main: './reactStartup.js'
@@ -43,14 +46,20 @@ module.exports = {
                     presets: ['react', 'es2015-rollup', 'stage-1', 'stage-2'],
                     plugins: ['transform-decorators-legacy', 'external-helpers']
                 }
+            },
+            { 
+                test: /\.(eot|svg|ttf|woff|woff2|css)$/, 
+                loader: ExtractTextPlugin.extract(["style-loader", "css-loader"]) 
             }
         ]
     },
     plugins: [
-        (!noVisualization ? 
+        (0 && !noVisualization ? 
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static'
             }) : null),
+
+        new ExtractTextPlugin("[name].[ext]"),
 
         new webpack.optimize.CommonsChunkPlugin({
             name: 'react-build',

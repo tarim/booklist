@@ -6,6 +6,9 @@ import { createElement } from 'react';
 import {setDesktop, setMobile, setModule, setLoggedIn, setPublicInfo, setRequestDesktop, setIsTouch} from './applicationRoot/rootReducerActionCreators';
 import 'util/ajaxUtil';
 
+import './static/bootstrap/css/bootstrap.css';
+//import './static/fontawesome/css/font-awesome.css';
+
 if ('ontouchstart' in window || 'onmsgesturechange' in window){
     store.dispatch(setIsTouch(true));
 }
