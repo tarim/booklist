@@ -37,6 +37,15 @@ export default class BookViewListGrid extends React.Component{
                             {this.props.currentPage > 1 ? <BootstrapButton style={{ marginRight: '10px' }} preset="primary-xs" onClick={this.props.pageDown}><i className="fa fa-fw fa-chevron-left"></i> Previous</BootstrapButton> : null}
                             {this.props.hasMoreBooks ? <BootstrapButton preset="primary-xs" onClick={this.props.pageUp}>Next <i className="fa fa-fw fa-chevron-right"></i></BootstrapButton> :  null}
                         </div> : null }
+                    <div style={{position: 'fixed', top: 170, right: 15, border: '1px solid #ddd', width: '300px', backgroundColor: 'white', zIndex: 499}}>
+                        <h4 style={{margin: '5px 0px 5px 5px'}}>Hello world</h4>
+                        <hr style={{margin: 0}} />
+                        <span>A</span>
+                        <span>B</span>
+                        <span>C</span>
+                        <span>D</span>
+                        <span>E</span>
+                    </div>
                     <table className="table table-striped no-padding-top">
                         <thead style={{position: 'sticky', top: 100, backgroundColor: 'white', zIndex: 498}}>
                             <tr>
