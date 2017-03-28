@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {selector} from '../../reducers/publicUserSettings/reducer';
 import * as actionCreators from '../../reducers/passwordReset/actionCreators';
-import {AjaxButton} from 'applicationRoot/components/bootstrapButton';
+
 
 @connect(() => ({}), {...actionCreators})
 export default class PublicUserSettings extends Component {
@@ -45,7 +45,6 @@ export default class PublicUserSettings extends Component {
                                 <input ref={el => this.confirmPasswordEl = el} type="password" className="form-control" id="confirmNewPasswordInput" />
                             </div>
                         </div>
-                        <AjaxButton onClick={this.resetPassword} disabled={this.state.saved} running={this.state.saving} runningText='Saving' preset='primary'>Save</AjaxButton>
                         {this.state.mismatch ? 
                             <div>
                                 <br/>
