@@ -1,5 +1,5 @@
 import React from 'react';
-import { isLoggedIn } from 'reactStartup';
+import 'applicationRoot/components/bootstrapButton'
 
 const MainHomePane = props =>
     <div className="row" style={{margin: 0}}>
@@ -61,7 +61,7 @@ class HomeIfNotLoggedIn extends React.Component{
 class Home extends React.Component{
     constructor(){
         super();
-        this.state = { isLoggedIn: isLoggedIn() };
+        this.state = { isLoggedIn: false };
     }
     render(){
         return (

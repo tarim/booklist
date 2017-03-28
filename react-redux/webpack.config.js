@@ -57,7 +57,8 @@ module.exports = {
         }]
     },
     plugins: [!noVisualization ? new BundleAnalyzerPlugin({
-        analyzerMode: 'static'
+        analyzerMode: 'static',
+        generateStatsFile: true
     }) : null, new webpack.optimize.CommonsChunkPlugin({
         name: 'react-build',
         minChunks: function minChunks(module, count) {
@@ -76,6 +77,8 @@ module.exports = {
         minChunks: function minChunks(module, count) {
             return count >= 2;
         }
+    }), asyncBundle('XXXXXX', {
+        resources: ['applicationRoot/components/bootstrapButton']
     }), asyncBundle('react-dnd', { nodePaths: ['react-dnd', 'react-dnd-html5-backend', 'react-dnd-touch-backend', 'dnd-core'] }), asyncBundle('book-modal-helpers', {
         resources: ['applicationRoot/components/genericLabelSelect', 'applicationRoot/components/customColorPicker', 'util/jscolor'],
         nodePaths: ['react-autosuggest', 'react-autowhatever']
