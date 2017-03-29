@@ -1,5 +1,5 @@
 import React from 'react';
-import 'applicationRoot/components/bootstrapButton';
+
 
 const MainHomePane = props =>
     <div className="row" style={{margin: 0}}>
