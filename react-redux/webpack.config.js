@@ -77,11 +77,11 @@ module.exports = {
         minChunks: function minChunks(module, count) {
             return count >= 2;
         }
-    }), asyncBundle('XXXXXX', {
-        resources: ['applicationRoot/components/bootstrapButton']
     }), asyncBundle('react-dnd', { nodePaths: ['react-dnd', 'react-dnd-html5-backend', 'react-dnd-touch-backend', 'dnd-core'] }), asyncBundle('book-modal-helpers', {
         resources: ['applicationRoot/components/genericLabelSelect', 'applicationRoot/components/customColorPicker', 'util/jscolor'],
         nodePaths: ['react-autosuggest', 'react-autowhatever']
+    }), asyncBundle('XXXXXX', {
+        resources: ['applicationRoot/components/bootstrapButton']
     })].filter(function (p) {
         return p;
     }),
