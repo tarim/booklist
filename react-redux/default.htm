@@ -5,7 +5,7 @@
     <script>
         if (typeof fetch === 'undefined'){
             var fetchPolyfill = document.createElement('script');
-            fetchPolyfill.setAttribute('src','/react-redux/util/unfetch.js');
+            fetchPolyfill.setAttribute('src','/util/unfetch.js');
             document.head.appendChild(fetchPolyfill);
             fetchPolyfill.onload = function(){
                 window.fetch = unfetch;
@@ -16,8 +16,8 @@
     <meta charset="UTF-8">
     <title>Book tracker</title>
 
-    <link rel="stylesheet" href="react-redux/static/bootstrap/css/bootstrap-booklist-build.css">
-    <link rel="stylesheet" href="react-redux/static/fontawesome/css/font-awesome-booklist-build.css">    
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap-booklist-build.css">
+    <link rel="stylesheet" href="static/fontawesome/css/font-awesome-booklist-build.css">    
     
 
     <style type="text/css">
@@ -181,10 +181,10 @@
         }
     </script>
 
-    <script type="text/javascript" src="/react-redux/util/babelHelpers.min.js"></script>
-    <script type="text/javascript" src="/react-redux/dist/manifest-bundle.js"></script>
-    <script type="text/javascript" src="/react-redux/dist/react-build-bundle.js"></script>
-    <script type="text/javascript" src="/react-redux/dist/main-bundle.js"></script>
+    <script type="text/javascript" src="/util/babelHelpers.min.js"></script>
+    <script type="text/javascript" src="/dist/manifest-bundle.js"></script>
+    <script type="text/javascript" src="/dist/react-build-bundle.js"></script>
+    <script type="text/javascript" src="/dist/main-bundle.js"></script>
 
 </body>
 </html>
