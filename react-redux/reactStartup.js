@@ -1,14 +1,3 @@
-
-
-let currentModule;
-let currentModuleObject;
-let publicUserCache = {};
-
-
-const validModules = new Set(['books', 'scan', 'home', 'activate', 'view', 'subjects', 'settings']);
-let initial = true;
-
-
 loadModule(window.location);
 
 function loadModule(location) {
