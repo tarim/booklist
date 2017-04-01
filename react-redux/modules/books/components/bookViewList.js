@@ -1,17 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
-import GridView from './bookViewList-grid';
-import BasicListView from './bookViewList-basicList';
-
-import BooksMenuBar from './booksMenuBar';
-
-import * as actionCreatorsEditBook from '../reducers/editBook/actionCreators';
-import * as actionCreatorsSearch from '../reducers/bookSearch/actionCreators';
 import Loading from 'applicationRoot/components/loading';
 import Loadable from 'react-loadable';
 
-import { selector } from '../reducers/reducer';
 
 const ManualBookEntry = Loadable({
     loader: () => import('applicationRoot/components/manualBookEntry'),
