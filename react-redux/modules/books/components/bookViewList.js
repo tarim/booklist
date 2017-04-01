@@ -1,4 +1,5 @@
 import React from 'react';
+import {render} from 'react-dom';
 
 import Loading from 'applicationRoot/components/loading';
 import Loadable from 'react-loadable';

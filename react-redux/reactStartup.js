@@ -1,5 +1,4 @@
-import React from 'react';
-import {render} from 'react-dom';
+
 
 setTimeout(() => loadModule({pathname: '/home'}), 2000);
 

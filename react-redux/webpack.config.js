@@ -60,14 +60,16 @@ module.exports = {
         analyzerMode: 'static',
         generateStatsFile: true
     }) : null, new webpack.optimize.CommonsChunkPlugin({
-        name: 'react-build',
+        async: 'react-build',
         minChunks: function minChunks(module, count) {
             var context = module.context;
             return context && (context.indexOf('node_modules\\react\\') >= 0 || context.indexOf('node_modules\\react-dom\\') >= 0);
         }
-    }), new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest'
     }),
+
+    // new webpack.optimize.CommonsChunkPlugin({
+    //     name: 'manifest'
+    // }),        
 
     //*********************************** async chunks*************************
 

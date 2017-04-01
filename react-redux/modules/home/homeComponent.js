@@ -1,4 +1,5 @@
 import React from 'react';
+import {render} from 'react-dom';
 import 'applicationRoot/components/bootstrapButton';
 
 const MainHomePane = props =>
